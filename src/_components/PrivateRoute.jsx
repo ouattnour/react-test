@@ -7,17 +7,17 @@ export const PrivateRoute = ({ component: Component, roles, ...rest }) => (
     <Route {...rest} render={props => {
         const currentUser = authenticationService.currentUserValue;
         if (!currentUser) {
-            // not logged in so redirect to login page with the return url
+            // pas connecté donc rediriger vers la page de connexion avec l'url de retour
             return <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
         }
 
-        // check if route is restricted by role
+        // vérifier si la route est restreinte par rôle
         if (roles && roles.indexOf(currentUser.role) === -1) {
-            // role not authorised so redirect to home page
+            // rôle non autorisé donc rediriger vers la page d'accueil
             return <Redirect to={{ pathname: '/'}} />
         }
 
-        // authorised so return component
+        // autorisé donc retourner le composant
         return <Component {...props} />
     }} />
 )

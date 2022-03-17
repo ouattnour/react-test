@@ -33,30 +33,47 @@ class App extends React.Component {
     render() {
         const { currentUser, isAdmin } = this.state;
         return (
-            <Router history={history}>
+          <Router history={history}>
+            <div>
+              {currentUser && (
                 <div>
-                    {currentUser &&
-                        <nav className="navbar navbar-expand navbar-dark bg-dark">
-                            <div className="navbar-nav">
-                                <Link to="/" className="nav-item nav-link">Home</Link>
-                                {isAdmin && <Link to="/admin" className="nav-item nav-link">Admin</Link>}
-                                <a onClick={this.logout} className="nav-item nav-link">Logout</a>
-                            </div>
-                        </nav>
-                    }
-                    <div className="jumbotron">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-md-6 offset-md-3">
-                                    <PrivateRoute exact path="/" component={HomePage} />
-                                    <PrivateRoute path="/admin" roles={[Role.Admin]} component={AdminPage} />
-                                    <Route path="/login" component={LoginPage} />
-                                </div>
-                            </div>
-                        </div>
+                  <nav class="navbar navbar-expand bg-dark navbar-dark">
+                    <div class="container-fluid">
+                      <a class="navbar-brand">Navbar</a>
+                      <div className="navbar-nav">
+                        <Link to="/" className="nav-item nav-link">
+                          Home
+                        </Link>
+                        {isAdmin && (
+                          <Link to="/admin" className="nav-item nav-link">
+                            Admin
+                          </Link>
+                        )}
+                        <a onClick={this.logout} className="nav-item nav-link ">
+                          Logout
+                        </a>
+                      </div>
                     </div>
+                  </nav>
                 </div>
-            </Router>
+              )}
+              <div className="jumbotron" >
+                <div className="container">
+                  <div className="row">
+                    <div className="col-md-6 offset-md-3">
+                      <PrivateRoute exact path="/" component={HomePage} />
+                      <PrivateRoute
+                        path="/admin"
+                        roles={[Role.Admin]}
+                        component={AdminPage}
+                      />
+                      <Route path="/login" component={LoginPage} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Router>
         );
     }
 }

@@ -1,4 +1,5 @@
+//listes des rôle
 export const Role = {
-    Admin: 'Admin',
-    User: 'User'    
-}
+  Admin: "Admin",
+  Client: "Client",
+};
